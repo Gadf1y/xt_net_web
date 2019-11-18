@@ -112,12 +112,73 @@ namespace Task00
         /// </summary>
         /// <param name="args"></param>
 
-        public static void Array()
-        {
-            Console.Write("Размер массива: ");
-            int Size = Convert.ToInt32(Console.ReadLine());
+        
+            public static void Array()
+            {
+            Console.Write("Ввести размер массива: ");
+            int x = Convert.ToInt32(Console.ReadLine());
+            Random rand = new Random();
+                int[][] arrays = new int[x][];
+                for (int i = 0; i < x; i++)
+                {
+                    Console.Write("Ввести количество элементов: ", i + 1);
+                    int y = Convert.ToInt32(Console.ReadLine());
+                    arrays[i] = new int[y];
+                }
+                for (int i = 0; i < arrays.Length; i++)
+                {
+                    for (int j = 0; j < arrays[i].Length; j++)
+                        arrays[i][j] = rand.Next(0, 100);
+                }
+                Console.WriteLine();
+                Console.WriteLine("Несортированный массив ");
+                WriteArray(arrays);
+                SortArray(arrays);
+                Console.WriteLine("Сортированый массив: ");
+                WriteArray(arrays);
+            }
+            public static void WriteArray(int[][] arrays)
+            {
 
-        }
+                Console.Write("{");
+                foreach (int[] i in arrays)
+                {
+                    Console.Write("{");
+                    foreach (int j in i)
+                    {
+                        Console.Write(j.ToString() + ",");
+                    }
+                    Console.Write("},");
+                }
+                Console.WriteLine("}\n");
+            }
+            public static void SortArray(int[][] arrays)
+            {
+                int i = 0;
+                foreach (int[] arr in arrays)
+                    i += arr.Length;
+                int[] temp = new int[i];
+                i = 0;
+                for (int n = 0; n < arrays.Length; n++)
+                {
+                    for (int m = 0; m < arrays[n].Length; m++)
+                    {
+                        temp[i] = arrays[n][m];
+                        i++;
+                    }
+                }
+                i = 0;
+                System.Array.Sort(temp);
+                for (int n = 0; n < arrays.Length; n++)
+                {
+                    for (int m = 0; m < arrays[n].Length; m++)
+                    {
+                        arrays[n][m] = temp[i];
+                        i++;
+                    }
+                }
+            }
+       
 
 
 
@@ -147,12 +208,14 @@ namespace Task00
 
 
 
-        static void Main(string[] args)
+            static void Main(string[] args)
         {
        //Console.WriteLine(Sequence(5));
       //Console.WriteLine(Simple(7));
-      Square(5);
-       Console.ReadKey();
+     // Square(5);
+     //Console.ReadKey();
+            Array();
+            Console.ReadLine();
         
 
 
